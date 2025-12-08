@@ -1,0 +1,16 @@
+{% extends "newsapp/base.html" %}
+{% block content %}
+<div class="auth-container">
+    <h2>Login</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+
+    <p>
+        <a href="{% url 'newsapp:password_reset' %}">Forgot your password?</a>
+    </p>
+</div>
+{% endblock %}

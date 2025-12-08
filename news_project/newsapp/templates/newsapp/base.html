@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ditaba4u</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'newsapp/styles.css' %}">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="/">Ditaba4u</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/category/technology/">Technology</a></li>
+                <li class="nav-item"><a class="nav-link" href="/category/sports/">Sports</a></li>
+                <li class="nav-item"><a class="nav-link" href="/category/entertainment/">Entertainment</a></li>
+            </ul>
+
+            <!-- Search -->
+            <form class="d-flex me-3" action="/search/" method="get">
+                <input name="q" class="form-control me-2" type="search" placeholder="Search news...">
+            </form>
+
+            <!-- Auth Links -->
+            <ul class="navbar-nav mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'newsapp:signup' %}">Sign Up</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/newsapp/add-article/">Add Article</a>
+                </li>
+
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'newsapp:logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'newsapp:login' %}">Login</a>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div class="row">
+
+        <div class="col-md-8">
+            {% block content %}{% endblock %}
+        </div>
+
+        <div class="col-md-4">
+            {% include 'newsapp/sidebar.html' %}
+        </div>
+
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<footer class="bg-light text-center text-lg-start mt-4 p-3">
+    © Ditaba4u brought to you by yours truly.
+</footer>
+
+</body>
+</html>

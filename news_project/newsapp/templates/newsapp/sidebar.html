@@ -1,0 +1,24 @@
+<div class="sidebar-ads">
+    <h4 class="ads-title">Sponsored</h4>
+
+    {% for ad in sidebar_ads %}
+        <div class="ad-card">
+            {% if ad.url %}
+            <a href="{{ ad.url }}" target="_blank">
+            {% endif %}
+
+                {% if ad.image %}
+                    <img src="{{ ad.image.url }}" class="ad-img">
+                {% else %}
+                    <div class="ad-placeholder">Advertisement</div>
+                {% endif %}
+                <p class="ad-title">{{ ad.title }}</p>
+
+            {% if ad.url %}
+            </a>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No ads available.</p>
+    {% endfor %}
+</div>
